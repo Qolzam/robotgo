@@ -1,6 +1,6 @@
 // Copyright 2016 The go-vgo Project Developers. See the COPYRIGHT
 // file at the top-level directory of this distribution and at
-// https://github.com/go-vgo/robotgo/blob/master/LICENSE
+// https://github.com/Qolzam/robotgo/blob/master/LICENSE
 //
 // Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
 // http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
@@ -17,10 +17,11 @@
 
 void dispatch_proc(iohook_event * const event) {
 	char buffer[256] = { 0 };
+	loggerProc(LOG_LEVEL_ERROR, "Failed to allocate memory. (%#X)", event->typ);
 	size_t length = snprintf(buffer, sizeof(buffer),
 			"id=%i,when=%" PRIu64 ",mask=0x%X",
 			event->type, event->time, event->mask);
-
+	
 	switch (event->type) {
 		case EVENT_KEY_PRESSED:
 			// If the escape key is pressed, naturally terminate the program.
